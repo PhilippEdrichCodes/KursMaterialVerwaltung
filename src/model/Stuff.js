@@ -1,10 +1,10 @@
-import Gruppe from './Group'
+import Group from './Group'
 
 /**
  * Diese Klasse steuert das Modell der App
  *
- * @property {Gruppe[]} gruppenListe      - enthält die Artikelgruppen
- * @property {Gruppe}   aktiveGruppe      - enthält die aktuell ausgewählte Gruppe
+ * @property {Group[]} gruppenListe      - enthält die Artikelgruppen
+ * @property {Group}   aktiveGruppe      - enthält die aktuell ausgewählte Group
  * @property {boolean}  meldungenAusgeben - steuert, ob eine Meldung ausgegeben werden soll oder nicht
  */
 class Stuff {
@@ -23,7 +23,7 @@ class Stuff {
    * Looks for a `group` by its name and returns it if found
    * @param {String} toSearch - `name` to look for
    * @param {Boolean} inform - switch to turn on/off debug message
-   * @returns {Gruppe | null} gefundeneGruppe - die gefundene Gruppe; `null`, wenn nichts gefunden wurde
+   * @returns {Group | null} gefundeneGruppe - die gefundene Group; `null`, wenn nichts gefunden wurde
    */
   findGroup(toSearch, inform=false) {
     for (let group of this.groupList) {
@@ -33,54 +33,54 @@ class Stuff {
     }
     // nichts gefunden, meldung ausgeben
     if (inform) {
-      this.printAndSave("[App] Gruppe \"" + name + "\" nicht gefunden", true)
+      this.printAndSave("[App] Group \"" + name + "\" nicht gefunden", true)
     }
     return null
   }
 
   /**
-   * Fügt eine Gruppe in der Gruppenliste hinzu
-   * @param {String} name - Name der neuen Gruppe
-   * @returns {Gruppe} neueGruppe - die neu hinzugefügte Gruppe
+   * Fügt eine Group in der Gruppenliste hinzu
+   * @param {String} name - Name der neuen Group
+   * @returns {Group} neueGruppe - die neu hinzugefügte Group
    */
   gruppeHinzufuegen(name) {
     let vorhandeneGruppe = this.findGroup(name)
     if (!vorhandeneGruppe) {
-      let neueGruppe = new Gruppe(name, this.groupList.length)
+      let neueGruppe = new Group(name, this.groupList.length)
       this.groupList.push(neueGruppe)
-      this.printAndSave("[App] Gruppe \"" + name + "\" hinzugefügt")
+      this.printAndSave("[App] Group \"" + name + "\" hinzugefügt")
       return neueGruppe
     } else {
-      this.printAndSave("[App] Gruppe \"" + name + "\" existiert schon!", true)
+      this.printAndSave("[App] Group \"" + name + "\" existiert schon!", true)
     }
   }
 
   /**
-   * Entfernt die Gruppe mit dem `name`
-   * @param {String} name - Name der zu löschenden Gruppe
+   * Entfernt die Group mit dem `name`
+   * @param {String} name - Name der zu löschenden Group
    */
   gruppeEntfernen(name) {
     let loeschGruppe = this.findGroup(name)
     if (loeschGruppe) {
       let index = this.groupList.indexOf(loeschGruppe)
       this.groupList.splice(index, 1)
-      this.printAndSave("[App] Gruppe \"" + name + "\" entfernt"
+      this.printAndSave("[App] Group \"" + name + "\" entfernt"
       )
     } else {
-      this.printAndSave("[App] Gruppe \"" + name + "\" konnte NICHT entfernt werden!", true)
+      this.printAndSave("[App] Group \"" + name + "\" konnte NICHT entfernt werden!", true)
     }
   }
 
   /**
-   * Benennt die Gruppe `alterName` um
-   * @param {String} alterName - Name der umzubenennenden Gruppe
-   * @param {String} neuerName - der neue Name der Gruppe
+   * Benennt die Group `alterName` um
+   * @param {String} alterName - Name der umzubenennenden Group
+   * @param {String} neuerName - der neue Name der Group
    */
   gruppeUmbenennen(alterName, neuerName) {
     let suchGruppe = this.findGroup(alterName, true)
     if (suchGruppe) {
       suchGruppe.name = neuerName
-      this.printAndSave("[App] Gruppe \"" + alterName + "\" umbenannt in \"" + neuerName + "\"")
+      this.printAndSave("[App] Group \"" + alterName + "\" umbenannt in \"" + neuerName + "\"")
     }
   }
 
@@ -124,7 +124,7 @@ class Stuff {
     // sortiere zuerst die Gruppen
     this.groupList.sort(sortierFunktion)
 
-    // sortiere danach die Item jeder Gruppe
+    // sortiere danach die Item jeder Group
     for (let gruppe of this.groupList) {
       gruppe.itemList.sort(sortierFunktion)
     }
@@ -133,8 +133,8 @@ class Stuff {
 
   /**
    * Sortiert Elemente alphabetisch aufsteigend nach dem Namen
-   * @param {Gruppe|Item} a - erstes Element
-   * @param {Gruppe|Item} b - zweites Element
+   * @param {Group|Item} a - erstes Element
+   * @param {Group|Item} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereAufsteigend(a, b) {
@@ -145,8 +145,8 @@ class Stuff {
 
   /**
    * Sortiert Elemente alphabetisch absteigend nach dem Namen
-   * @param {Gruppe|Item} a - erstes Element
-   * @param {Gruppe|Item} b - zweites Element
+   * @param {Group|Item} a - erstes Element
+   * @param {Group|Item} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereAbsteigend(a, b) {
@@ -157,8 +157,8 @@ class Stuff {
 
   /**
    * Sortiert Elemente aufsteigend nach dem ursprünglichen Index
-   * @param {Gruppe|Item} a - erstes Element
-   * @param {Gruppe|Item} b - zweites Element
+   * @param {Group|Item} a - erstes Element
+   * @param {Group|Item} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereIndex(a, b) {

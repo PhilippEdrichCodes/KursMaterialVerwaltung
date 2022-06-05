@@ -102,7 +102,7 @@ class App extends React.Component {
 
   setAktiveGruppe(gruppe) {
     Modell.activeGroup = gruppe
-    Modell.printAndSave("[App] Gruppe \"" + gruppe.name + "\" ist nun aktiv")
+    Modell.printAndSave("[App] Group \"" + gruppe.name + "\" ist nun aktiv")
     this.setState({aktiveGruppe: Modell.activeGroup})
   }
 

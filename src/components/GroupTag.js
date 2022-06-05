@@ -5,11 +5,11 @@ import ArtikelTag from './ItemTag'
 /**
  * Diese Komponente repräsentiert eine Artikelgruppe
  * @component
- * @property {Boolean} aktiv - setzt diese Gruppe als `activeGroup` in der App.js
- * @property {Function} aktiveGruppeHandler - setzt diese Gruppe als `activeGroup` in der {@link ../App}
+ * @property {Boolean} aktiv - setzt diese Group als `activeGroup` in der App.js
+ * @property {Function} aktiveGruppeHandler - setzt diese Group als `activeGroup` in der {@link ../App}
  * @property {Function} checkHandler - erledigt und reaktiviert Item; wird an den {@link ArtikelTag} durchgereicht
- * @property {Boolean} gekauft - steuert, ob diese Gruppe in der "Gekauft-" oder "NochZuKaufen-Liste" erscheint
- * @property {Gruppe} gruppe - die darzustellende Gruppe
+ * @property {Boolean} gekauft - steuert, ob diese Group in der "Gekauft-" oder "NochZuKaufen-Liste" erscheint
+ * @property {Group} gruppe - die darzustellende Group
  */
 class GruppenTag extends React.Component {
   constructor (props) {

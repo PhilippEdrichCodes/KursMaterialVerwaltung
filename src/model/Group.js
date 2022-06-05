@@ -1,3 +1,4 @@
+import Item from "./Item"
 import Set from "./Set.js"
 import Modell from "./Stuff.js"
 
@@ -10,7 +11,7 @@ import Modell from "./Stuff.js"
  * @property {String}    name         - name of this group
  * @property {Set[]}   itemList       - list of the content
  */
-class Gruppe {
+class Group {
   static counter = 1
   id
   index
@@ -25,7 +26,7 @@ class Gruppe {
    * @param {Set[]} itemList - the content this group shall have. If none is given, [] is set as default
    */
   constructor(name, index, itemList =[]) {
-    this.id = Gruppe.counter++
+    this.id = Group.counter++
     this.name = name
     this.index = index
     this.itemList = []
@@ -37,9 +38,9 @@ class Gruppe {
    * @param {Boolean} inform - triggers if a message is given
    * @returns {Item|null} artikel - der gefundene Item bzw. `null`, wenn nichts gefunden wurde
    */
-  findItem(toSearch, inform) {
+  findItem(toSearch, inform = false) {
     for (let item of this.itemList) {
-      if (item.name === toSearch) {
+      if (item.getItem().getName() === toSearch) {
         return item
       }
     }
@@ -106,16 +107,16 @@ class Gruppe {
 
   /**
    * Looks for an item by its name and changes its name
-   * @param {String} alterName - Name des zu findenden Artikels
-   * @param {String} neuerName - neuer Name des Artikels
+   * @param {String} oldName - Name des zu findenden Artikels
+   * @param {String} newName - neuer Name des Artikels
    */
-  renameItem(alterName, neuerName) {
-    let vorhandenerArtikel = this.findItem(alterName)
+  renameItem(oldName, newName) {
+    let vorhandenerArtikel = this.findItem(oldName)
     if (vorhandenerArtikel) {
-      vorhandenerArtikel.name = neuerName
+      vorhandenerArtikel.name = newName
     }
-    Modell.printAndSave("[" + this.name + "] Item \"" + alterName + "\" umbenannt in \"" + neuerName + "\"")
+    Modell.printAndSave("[" + this.name + "] Item \"" + oldName + "\" umbenannt in \"" + newName + "\"")
   }
 }
 
-export default Gruppe
+export default Group
