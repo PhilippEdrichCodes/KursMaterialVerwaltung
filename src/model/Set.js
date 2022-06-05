@@ -1,3 +1,4 @@
+import Item from "./Item"
 import SetItem from "./SetItem"
 
 /**
@@ -14,6 +15,58 @@ class Set {
    */
   constructor (itemList = []) {
     this.itemList = itemList
+  }
+
+  /**
+   * Adds an SetItem at the end of the list
+   * @param {SetItem} entry - the item to be added to the list
+   */
+  add(entry){
+    this.itemList.push(entry)
+  }
+
+  /**
+   * Looks for an item in the list.
+   * Compares only Item.name at the moment
+   * @param {SetItem} toSearch - the item wanted
+   * @returns {SetItem | null} - returns either the wanted SetItem or null if nothing found
+   */
+  find(toSearch){
+    for (const element of this.itemList) {
+      if (toSearch.getItem().getName() === element.getItem().name){
+        return element
+      } else {
+        return null
+      }
+
+    }
+  }
+
+  /**
+   * Looks for an item in the list.
+   * Compares only Item.name at the moment
+   * @param {SetItem} toSearch - the item wanted
+   * @returns {Number} - returns either the index of the wanted SetItem or -1 if nothing found
+   */
+  indexOf(toSearch) {
+    for (const element of this.itemList) {
+      if (toSearch.getItem().getName() === element.getItem().name){
+        return this.itemList.indexOf(element)
+      } else {
+        return -1
+      }
+    }
+  }
+
+  /**
+   * Removes the given entry from this.itemList
+   * @param {SetItem} entry - the item to be removed
+   */
+  remove(entry) {
+    let pos = this.indexOf(entry)
+    if (pos !== -1) {
+      this.itemList.splice(pos,1)
+    }
   }
 
 }
