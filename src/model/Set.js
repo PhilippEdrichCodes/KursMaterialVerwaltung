@@ -3,7 +3,7 @@ import SetItem from "./SetItem"
 
 /**
  * Class representing a set of items
- * @property {SetItem[]} itemList
+ * @property {SetItem[]} itemList - Array of items contained in this Set
  */
 class Set {
 
@@ -21,7 +21,7 @@ class Set {
    * Adds an SetItem at the end of the list
    * @param {SetItem} entry - the item to be added to the list
    */
-  add(entry){
+  add (entry) {
     this.itemList.push(entry)
   }
 
@@ -31,14 +31,17 @@ class Set {
    * @param {SetItem} toSearch - the item wanted
    * @returns {SetItem | null} - returns either the wanted SetItem or null if nothing found
    */
-  find(toSearch){
-    for (const element of this.itemList) {
-      if (toSearch.getItem().getName() === element.getItem().name){
-        return element
-      } else {
-        return null
+  find (toSearch) {
+    if (this.itemList.length > 0) {
+      for (const element of this.itemList) {
+        if (toSearch.equals(element)) {
+          return element
+        } else {
+          return null
+        }
       }
-
+    } else {
+      return null
     }
   }
 
@@ -48,13 +51,17 @@ class Set {
    * @param {SetItem} toSearch - the item wanted
    * @returns {Number} - returns either the index of the wanted SetItem or -1 if nothing found
    */
-  indexOf(toSearch) {
-    for (const element of this.itemList) {
-      if (toSearch.getItem().getName() === element.getItem().name){
-        return this.itemList.indexOf(element)
-      } else {
-        return -1
+  indexOf (toSearch) {
+    if (this.itemList.length > 0) {
+      for (const element of this.itemList) {
+        if (toSearch.equals(element)) {
+          return this.itemList.indexOf(element)
+        } else {
+          return -1
+        }
       }
+    } else {
+      return -1
     }
   }
 
@@ -62,10 +69,10 @@ class Set {
    * Removes the given entry from this.itemList
    * @param {SetItem} entry - the item to be removed
    */
-  remove(entry) {
-    let pos = this.indexOf(entry)
-    if (pos !== -1) {
-      this.itemList.splice(pos,1)
+  remove (entry) {
+    let index = this.indexOf(entry)
+    if (index !== -1) {
+      this.itemList.splice(index, 1)
     }
   }
 
