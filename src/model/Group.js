@@ -79,15 +79,15 @@ class Group {
   }
 
   /**
-   * Entfernt einen Item aus der ArtikelListe
-   * @param {String} name - Index des zu entfernenden Artikels
+   * Removes an Item from `this.itemList`
+   * @param {String} name - name of Item to remove
    */
   removeItem(name) {
     let toRemove = this.findItem(name)
     if (toRemove) {
       const index = this.itemList.indexOf(toRemove)
       this.itemList.splice(index, 1)
-      this.artikelNeuNummerieren()
+      this.renewIndex()
       Modell.printAndSave("[" + this.name + "] Item \"" + name + "\" entfernt"
       )
     } else {
@@ -97,9 +97,9 @@ class Group {
   }
 
   /**
-   * Nummeriert alle Item in der Item-Liste neu durch
+   * ReIndexes `this.itemList`
    */
-  artikelNeuNummerieren() {
+  renewIndex() {
     for (let i = 0; i < this.itemList.length; i++) {
       this.itemList[i].index = i
     }
@@ -107,13 +107,13 @@ class Group {
 
   /**
    * Looks for an item by its name and changes its name
-   * @param {String} oldName - Name des zu findenden Artikels
-   * @param {String} newName - neuer Name des Artikels
+   * @param {String} oldName - name of item to rename
+   * @param {String} newName - new name of the item
    */
   renameItem(oldName, newName) {
-    let vorhandenerArtikel = this.findItem(oldName)
-    if (vorhandenerArtikel) {
-      vorhandenerArtikel.name = newName
+    let itemInList = this.findItem(oldName)
+    if (itemInList) {
+      itemInList.name = newName
     }
     Modell.printAndSave("[" + this.name + "] Item \"" + oldName + "\" umbenannt in \"" + newName + "\"")
   }
