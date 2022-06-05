@@ -50,41 +50,41 @@ class Gruppe {
   }
 
   /**
-   * Fügt einen Item zur ArtikelListe hinzu und gibt diesen als Wert zurück
-   * @param {String} name - Name des neuen Artikels
-   * @returns {Item} neuerArtikel - der neu erzeugte Item
+   * Add an Item to itemList and returns it
+   * @param {String} name - name of the new Item
+   * @returns {Item} newItem - the newly created Item
    */
   addItem(name) {
-    let vorhandenerArtikel = this.findItem(name, false)
-    if (!vorhandenerArtikel) {
-      let neuerArtikel = new Item(name, this.itemList.length)
-      this.itemList.push(neuerArtikel)
+    let existingItem = this.findItem(name, false)
+    if (!existingItem) {
+      let newItem = new Item(name, this.itemList.length)
+      this.itemList.push(newItem)
       Modell.printAndSave("[" + this.name + "] Item " + name + " hinzugefügt")
-      return neuerArtikel
+      return newItem
     } else {
       Modell.printAndSave("[" + this.name + "] Item " + name + " existiert schon!", true)
     }
   }
 
   /**
-   * Erzeugt einen neuen Item aus einem eingelesenen JSON-Objekt.
-   * Wird von {@link Modell.initialize()} verwendet.
-   * @param {object} artikel - das übergebene JSON-Objekt
+   * Creates a new Item of a read JSON-Object.
+   * Used by {@link Stuff.initialize()}.
+   * @param {object} item - given JSON-Object
    */
-  artikelObjektHinzufuegen(artikel) {
-    let neuerArtikel = this.addItem(artikel.name)
-    // kopiert alle Properties aus "artikel" nach "neuerArtikel"
-    Object.assign(neuerArtikel, artikel)
+  addItemByObject(item) {
+    let newItem = this.addItem(item.name)
+    // copies all properties from "item" to "newItem"
+    Object.assign(newItem, item)
   }
 
   /**
    * Entfernt einen Item aus der ArtikelListe
    * @param {String} name - Index des zu entfernenden Artikels
    */
-  artikelEntfernen(name) {
-    let loeschArtikel = this.findItem(name)
-    if (loeschArtikel) {
-      const index = this.itemList.indexOf(loeschArtikel)
+  removeItem(name) {
+    let toRemove = this.findItem(name)
+    if (toRemove) {
+      const index = this.itemList.indexOf(toRemove)
       this.itemList.splice(index, 1)
       this.artikelNeuNummerieren()
       Modell.printAndSave("[" + this.name + "] Item \"" + name + "\" entfernt"

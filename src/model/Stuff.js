@@ -133,8 +133,8 @@ class Stuff {
 
   /**
    * Sortiert Elemente alphabetisch aufsteigend nach dem Namen
-   * @param {Gruppe|Artikel} a - erstes Element
-   * @param {Gruppe|Artikel} b - zweites Element
+   * @param {Gruppe|Item} a - erstes Element
+   * @param {Gruppe|Item} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereAufsteigend(a, b) {
@@ -145,8 +145,8 @@ class Stuff {
 
   /**
    * Sortiert Elemente alphabetisch absteigend nach dem Namen
-   * @param {Gruppe|Artikel} a - erstes Element
-   * @param {Gruppe|Artikel} b - zweites Element
+   * @param {Gruppe|Item} a - erstes Element
+   * @param {Gruppe|Item} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereAbsteigend(a, b) {
@@ -157,8 +157,8 @@ class Stuff {
 
   /**
    * Sortiert Elemente aufsteigend nach dem ursprünglichen Index
-   * @param {Gruppe|Artikel} a - erstes Element
-   * @param {Gruppe|Artikel} b - zweites Element
+   * @param {Gruppe|Item} a - erstes Element
+   * @param {Gruppe|Item} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereIndex(a, b) {
@@ -200,7 +200,7 @@ class Stuff {
     for (let gruppe of jsonDaten.groupList) {
       let neueGruppe = this.gruppeHinzufuegen(gruppe.name)
       for (let artikel of gruppe.itemList) {
-        neueGruppe.artikelObjektHinzufuegen(artikel)
+        neueGruppe.addItemByObject(artikel)
       }
     }
     if (jsonDaten.aktiveGruppeName) {
